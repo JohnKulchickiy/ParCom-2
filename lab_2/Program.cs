@@ -10,6 +10,9 @@ namespace lab_2
     {
         static void Main(string[] args)
         {
+            Process_Functions proc = new Process_Functions();
+
+            Console.ReadKey();
         }
     }
 }
