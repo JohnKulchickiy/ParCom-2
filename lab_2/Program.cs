@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,32 @@ namespace lab_2
 {
     class Program
     {
+        public Program()
+        {
+            _proc = Process.GetProcesses();
+        }
+
+        static Process[] _proc;
+
         static void Main(string[] args)
         {
-            Process_Functions proc = new Process_Functions();
 
-            Console.ReadKey();
+
+            Boolean _exitTrigger = false; //Создаем триггер для loop'а меню
+            //Process_Functions proc = new Process_Functions(); // Создаем класс 
+            Object[] _menuItems = new Object[] { Process_Functions._showActual(_proc) };
+
+            while (_exitTrigger == false)
+            {
+                Console.WriteLine("Введите цифру для выбора действия\n1.Работа с процессами\n2.Работа с потоками\n3.Выход");
+
+                do
+                {
+
+                } while ();
+
+                Console.ReadKey();
+            }
         }
     }
 }

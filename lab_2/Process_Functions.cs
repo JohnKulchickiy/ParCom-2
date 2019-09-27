@@ -9,35 +9,25 @@ namespace lab_2
 {
     class Process_Functions
     {
-        private Process[] _processes;
-
-        public Process_Functions()
-        {
-            _processes = _GetActual();
-        }
-
         /// <summary>
-        /// Получить список актуальных процессов локальной машины
+        /// Вывод актуальных процессов в консоль
         /// </summary>
-        /// <returns></returns>
-        public Process[] _GetActual()
+        /// <param name="proc">Массив процессов типа Process<</param>
+        static public void _showActual(Process[] proc)
         {
-            Process[] _proc = Process.GetProcesses();
             Console.WriteLine("Актуальные процессы:");
-            foreach (Process proc in _proc)
+            foreach (Process process in proc)
             {
                 try
                 {
-                    Console.WriteLine($"Компьютер:{proc.MachineName}\t Идентификатор:{proc.Id}\t Время начала процесса:{proc.StartTime}\t Имя:{proc.ProcessName}");
+                    Console.WriteLine($"Компьютер:{process.MachineName}\t Идентификатор:{process.Id}\t Время начала процесса:{process.StartTime}\t Имя:{process.ProcessName}");
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine("Ошибка - " + e.Message);
+                    Console.WriteLine("Ошибка - " + e.Message);
                 }
             }
-            return _proc;
         }
-
 
 
     }
