@@ -18,11 +18,9 @@ namespace lab_2
 
         static void Main(string[] args)
         {
-
-
             Boolean _exitTrigger = false; //Создаем триггер для loop'а меню
             //Process_Functions proc = new Process_Functions(); // Создаем класс 
-            Object[] _menuItems = new Object[] { Process_Functions._showActual(_proc) };
+            Delegate[] _menuFunc = new Delegate[] {Process_Functions._showActualProcess(), }
 
             while (_exitTrigger == false)
             {
