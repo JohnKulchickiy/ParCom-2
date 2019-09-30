@@ -96,7 +96,7 @@ namespace lab_2
         {
             try
             {
-                Process.Start(@"C:\Users\avata\AppData\Local\Programs\Opera", argument);
+                Process.Start(@"C:\Users\avata\AppData\Local\Programs\Opera\launcher.exe", argument);
             }
             catch (Exception e)
             {

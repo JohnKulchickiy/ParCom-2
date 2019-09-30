@@ -18,7 +18,7 @@ namespace lab_2
             {
                 Console.Clear();
                 Console.WriteLine("1.Вывести все процессы\n2.Начать процесс\n3.Закрыть процесс\nEscape - Выход");
-                cki_main = Console.ReadKey(false);
+                cki_main = Console.ReadKey(true);
 
                 switch (cki_main.Key)
                 {
@@ -29,7 +29,7 @@ namespace lab_2
                         do
                         {
                             Console.WriteLine("1.Вывести все потоки в заданном процессе\n2.Вывести все модули заданного процесса\nEscape - назад");
-                            cki_sec = Console.ReadKey(false);
+                            cki_sec = Console.ReadKey(true);
                             switch (cki_sec.Key)
                             {
                                 //Показываем актуальные потоки
