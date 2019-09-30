@@ -83,7 +83,7 @@ namespace lab_2
 
                 foreach (ProcessModule module in _processModule)
                 {
-                    Console.WriteLine($"Имя модуля:{module.ModuleName}\tПуть к модулю:{module.FileName}\tОбьем памяти модуля:{module.ModuleMemorySize}");
+                    Console.WriteLine($"Имя модуля:{module.ModuleName}\tОбьем памяти модуля:{module.ModuleMemorySize}\tПуть к модулю:{module.FileName}");
                 }
             }
         }

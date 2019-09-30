@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,29 +10,74 @@ namespace lab_2
 {
     class Program
     {
-        public Program()
+        static public void _Menu(Process[] processes)
         {
-            _proc = Process.GetProcesses();
+            ConsoleKeyInfo cki_main, cki_sec;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1.Вывести все процессы\n2.Начать процесс\n3.Закрыть процесс\nEscape - Выход");
+                cki_main = Console.ReadKey(false);
+
+                switch (cki_main.Key)
+                {
+                    //Вывести все процессы
+                    case ConsoleKey.D1: 
+                        Process_Functions._showActualProcess(processes);
+
+                        do
+                        {
+                            Console.WriteLine("1.Вывести все потоки в заданном процессе\n2.Вывести все модули заданного процесса\nEscape - назад");
+                            cki_sec = Console.ReadKey(false);
+                            switch (cki_sec.Key)
+                            {
+                                //Показываем актуальные потоки
+                                case ConsoleKey.D1:
+                                    Process_Functions._showActualStreams(processes);
+                                    break;
+                                // Показываем актуальные модули
+                                case ConsoleKey.D2:
+                                    Process_Functions._showActualModules(processes);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } while (cki_sec.Key != ConsoleKey.Escape);
+                        break;
+
+                    // Начать новый процесс
+                    case ConsoleKey.D2:
+                        Process_Functions._startNewProcess("https://www.google.com");
+                        break;
+
+                    // Закрыть процесс
+                    case ConsoleKey.D3:
+                        Process_Functions._killExistingProcess(processes);
+                        break;
+
+                    default:
+                        break;
+                }
+            } while (cki_main.Key != ConsoleKey.Escape);
         }
 
         static Process[] _proc;
 
         static void Main(string[] args)
         {
-            Boolean _exitTrigger = false; //Создаем триггер для loop'а меню
-            //Process_Functions proc = new Process_Functions(); // Создаем класс 
-            Delegate[] _menuFunc = new Delegate[] {Process_Functions._showActualProcess(), }
+            _proc = Process.GetProcesses();
 
-            while (_exitTrigger == false)
+            // В потоке выполняем все действия 
+            Thread menuThread = new Thread(() => _Menu(_proc));
+
+            menuThread.Start();
+
+            // В основном потоке обновляем информацию о актуальный процессах каждую минуту
+            while(menuThread.ThreadState != System.Threading.ThreadState.Stopped)
             {
-                Console.WriteLine("Введите цифру для выбора действия\n1.Работа с процессами\n2.Работа с потоками\n3.Выход");
-
-                do
-                {
-
-                } while ();
-
-                Console.ReadKey();
+                Thread.Sleep(10000);
+                _proc = Process.GetProcesses();
             }
         }
     }
